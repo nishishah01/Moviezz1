@@ -7,11 +7,16 @@
 </head>
 <body>
     <h1>Movie List</h1>
+    <form method="POST" action="{%url 'home'%}">
+    <label for="genre">Search a movie on  basid of genre: </label>
+    <input type="text" id="genre" name="genre" placeholder="Search">
+    <button type="submit">Search</button>
     <ul>
         {% for movie in movies %}
         <li>
             <h2>{{movie.Title}}</h2>
             <p>{{movie.Year}}</p>
+            
             <a href="{% url 'details' movie.Title %}">Details</a>  
         </li>
         {% endfor %}
