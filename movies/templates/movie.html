@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie List</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<style>
+    <style>
         body {
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
@@ -22,10 +21,11 @@
             margin: 20px 0;
         }
         .movie-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+
         }
         .movie-item {
             background-color: #ffffff;
@@ -56,22 +56,33 @@
             background-color: #0056b3;
         }
     </style>
+</head>
 <body>
-    <h1>Movie List</h1>
-    <form method="GET" action="{%url 'home'%}">
-    <label for="genre">Search a movie on  basid of genre: </label>
-    <input type="text" id="genre" name="genre" placeholder="Search">
-    <button type="submit">Search</button>
-    </form>
-    <ul>
-        {% for movie in movies %}
-        <li>
-            <h2>{{movie.Title}}</h2>
-            <p>{{movie.Year}}</p>
-            
-            <a href="{% url 'details' movie.Title %}">Details</a>  
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Movie List</h1>
+        <form method="GET" action="{% url 'details' %}" class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="title" class="sr-only">Search a movie by title:</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+
+        </form>
+        <div class="movie-list">
+            {% if movies %}
+            <div class="movie-item">
+                <h2>{{ movies.Title }}</h2>
+                <p><strong>Year:</strong> {{ movies.Year }}</p>
+                <p><strong>Type:</strong> {{ movies.Type }}</p>
+                <img src="{{ movies.Poster }}" alt="{{ movies.Title }}" class="img-fluid">
+                <p><strong>IMDB Rating:</strong> {{ movies.imdbRating }}</p>
+                <p>{{ movies.plot }}</p>
+
+            </div>
+            {% else %}
+            <p>No movies found.</p>
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>
