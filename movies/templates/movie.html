@@ -4,13 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+            color: #343a40;
+        }
+        .form-inline {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .movie-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .movie-item {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .movie-item h2 {
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+        .movie-item p {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        .movie-item a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #ffffff;
+            background-color: #007bff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .movie-item a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 <body>
     <h1>Movie List</h1>
-    <form method="POST" action="{%url 'home'%}">
+    <form method="GET" action="{%url 'home'%}">
     <label for="genre">Search a movie on  basid of genre: </label>
     <input type="text" id="genre" name="genre" placeholder="Search">
     <button type="submit">Search</button>
+    </form>
     <ul>
         {% for movie in movies %}
         <li>
